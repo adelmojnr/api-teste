@@ -1,63 +1,90 @@
 describe('Routes Books', () => {
-  const Books = app.datasource.models.Books
+  const { Books } = app.datasource.models;
   const defaultBook = {
     id: 1,
-    name: 'Default Book'
-  }
+    name: 'Default Book',
+  };
 
-  beforeEach(done => {
+  beforeEach((done) => {
     Books
       .destroy({ where: {} })
       .then(() => Books.create(defaultBook))
       .then(() => {
-        done()
-      })
-  })
+        done();
+      });
+  });
 
   describe('Route get /books', () => {
-    it('Should return a list of books', done => {
+    it('Should return a list of books', (done) => {
       request
         .get('/books')
         .end((err, res) => {
+          expect(res.body[0].id).to.be.eql(defaultBook.id);
+          expect(res.body[0].name).to.be.eql(defaultBook.name);
 
-          expect(res.body[0].id).to.be.eql(defaultBook.id)
-          expect(res.body[0].name).to.be.eql(defaultBook.name)
-
-          done(err)
-        })
-    })
-  })
+          done(err);
+        });
+    });
+  });
 
   describe('Route get /books/:id', () => {
-    it('Should return a book', done => {
+    it('Should return a book', (done) => {
       request
         .get('/books/1')
         .end((err, res) => {
+          expect(res.body.id).to.be.eql(defaultBook.id);
+          expect(res.body.name).to.be.eql(defaultBook.name);
 
-          expect(res.body.id).to.be.eql(defaultBook.id)
-          expect(res.body.name).to.be.eql(defaultBook.name)
-
-          done(err)
-        })
-    })
-  })
+          done(err);
+        });
+    });
+  });
 
   describe('Route POST /book', () => {
-    const newBook =  {
+    const newBook = {
       id: 2,
-      name: 'newBook'
-    }
-    it('Should be create a book', done => {
+      name: 'newBook',
+    };
+    it('Should be create a book', (done) => {
       request
         .post('/books')
         .send(newBook)
         .end((err, res) => {
+          expect(res.body.name).to.be.eql(newBook.name);
+          expect(res.body.id).to.be.eql(newBook.id);
 
-          expect(res.body.name).to.be.eql(newBook.name)
-          expect(res.body.id).to.be.eql(newBook.id)
+          done(err);
+        });
+    });
+  });
 
-          done(err)
-        })
-    })
-  })  
-})
+  describe('Route PUT /books/{id}', () => {
+    it('Should update a book', (done) => {
+      const updatedBook = {
+        id: 1,
+        name: 'updated book',
+      };
+
+      request
+        .put('/books/1')
+        .send(updatedBook)
+        .end((err, res) => {
+          expect(res.body).to.be.eql([1]);
+
+          done(err);
+        });
+    });
+  });
+
+  describe('Route DELETE /books/{id}', () => {
+    it('Should delete a book', (done) => {
+      request
+        .delete('/books/1')
+        .end((err, res) => {
+          expect(res.statusCode).to.be.eql(204);
+
+          done(err);
+        });
+    });
+  });
+});
