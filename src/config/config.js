@@ -6,7 +6,7 @@ module.exports = {
     dialect: 'mysql',
     define: {
       underscored: true,
-      timestamps: false,
-    },
-  },
-};
+      timestamps: false
+    }
+  }
+}
