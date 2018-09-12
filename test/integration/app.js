@@ -77,12 +77,11 @@ describe('Routes Books', () => {
   })
 
   describe('Route DELETE /books/{id}', () => {
-    it('Should delete a book', (done) => {
+    it('Should delete a book', done => {
       request
         .delete('/books/1')
         .end((err, res) => {
           expect(res.statusCode).to.be.eql(204)
-
           done(err)
         })
     })

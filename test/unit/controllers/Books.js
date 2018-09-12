@@ -103,7 +103,7 @@ describe('Controllers: Books', () => {
 
       const booksController = new BooksController(Books)
       return booksController.delete({ id: 1 })
-        .then(response => expect(response.statusCode)).to.be.eql(204)
+        .then(response => expect(response.statusCode).to.be.eql(204))
     })
   })
 })

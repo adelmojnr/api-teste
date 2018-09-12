@@ -39,7 +39,7 @@ class BooksController {
   }
 
   delete (params) {
-    this.Books.destroy({
+    return this.Books.destroy({
       where: params
     })
       .then(result => defaultResponse(result, 204))
