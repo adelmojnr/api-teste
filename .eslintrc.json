@@ -10,6 +10,8 @@
       "beforeEach": true,
       "request": true,
       "expect": true,
-      "td": true
+      "td": true,
+      "Joi": true,
+      "joiAssert": true
     }
 }

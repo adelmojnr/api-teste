@@ -35,7 +35,7 @@ describe('Controllers: Books', () => {
         updated_at: '2017-09-06T00:04:00.0000'
       }
 
-      td.when(Books.findOne( { where: { id: 1 } })).thenResolve(expectedResponse)
+      td.when(Books.findOne({ where: { id: 1 } })).thenResolve(expectedResponse)
 
       const booksController = new BooksController(Books)
       return booksController.getById({ id: 1 })
@@ -86,7 +86,7 @@ describe('Controllers: Books', () => {
         created_at: '2017-09-06T00:04:00.0000',
         updated_at: '2017-09-06T00:04:00.0000'
       }
-      td.when(Books.update(requestBody, { where: {id: 1}})).thenResolve(expectedResponse)
+      td.when(Books.update(requestBody, { where: { id: 1 } })).thenResolve(expectedResponse)
 
       const booksController = new BooksController(Books)
       return booksController.update(requestBody, { id: 1 })

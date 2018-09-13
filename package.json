@@ -5,8 +5,10 @@
   "license": "MIT",
   "scripts": {
     "server": "nodemon server.js",
-    "test-integration": "NODE_ENV=test mocha --opts test/integration/mocha.opts test/integration/**/*.js",
+    "test": "yarn run lint && yarn run test-integration && yarn run test-unit && yarn run test-contract", 
+    "test-integration": "NODE_ENV=test mocha --opts test/integration/mocha.opts test/integration/**/*.js --exit",
     "test-unit": "NODE_ENV=test mocha --opts test/unit/mocha.opts test/unit/**/*.js",
+    "test-contract": "NODE_ENV=test mocha --opts test/contracts/mocha.opts test/contracts/contracts/*.js --exit",
     "lint": "eslint '**/*.js'",
     "lint:fix": "eslint '**/*.js'"
   },
@@ -24,6 +26,8 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.0",
     "eslint-plugin-standard": "^4.0.0",
+    "joi": "^13.6.0",
+    "joi-assert": "^0.0.3",
     "mocha": "^5.2.0",
     "supertest": "^3.1.0",
     "testdouble": "^3.8.1"
