@@ -8,5 +8,7 @@ module.exports = {
       underscored: true
     },
     operatorsAliases: false
-  }
+  },
+  jwtSecret: 'Sec3t',
+  jwtSession: { session: false }
 }

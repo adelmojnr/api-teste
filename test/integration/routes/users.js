@@ -1,10 +1,10 @@
-describe('Users Books', () => {
+describe('Routes Users', () => {
   const { Users } = app.datasource.models
   const defaultUser = {
     id: 1,
-    name: 'Default User',
-    email: 'test@email.com',
-    password: 'teste'
+    name: 'Default user',
+    email: 'teste@mail.com',
+    password: 'pass123'
   }
 
   beforeEach((done) => {
@@ -48,18 +48,17 @@ describe('Users Books', () => {
     const newUser = {
       id: 2,
       name: 'newUser',
-      email: 'test2@email.com',
-      password: '123456'
+      email: 'email@email.com',
+      password: '1234156a4e'
     }
     it('Should be create a user', (done) => {
       request
         .post('/users')
         .send(newUser)
         .end((err, res) => {
-          expect(res.body.id).to.be.eql(newUser.id)
           expect(res.body.name).to.be.eql(newUser.name)
-          expect(res.body.email).to.be.eql(newUser.email)
-          expect(res.body.password).to.be.eql(newUser.password)
+          expect(res.body.id).to.be.eql(newUser.id)
+          expect(res.body.description).to.be.eql(newUser.description)
 
           done(err)
         })
@@ -67,12 +66,12 @@ describe('Users Books', () => {
   })
 
   describe('Route PUT /users/{id}', () => {
-    it('Should update an user', (done) => {
+    it('Should update a user', (done) => {
       const updatedUser = {
         id: 1,
         name: 'updated user',
-        email: 'updated@email.com',
-        password: 'teste'
+        email: 'adelmo@mail.com',
+        password: '123549ahguy'
       }
 
       request
@@ -87,7 +86,7 @@ describe('Users Books', () => {
   })
 
   describe('Route DELETE /users/{id}', () => {
-    it('Should delete a book', done => {
+    it('Should delete a user', done => {
       request
         .delete('/users/1')
         .end((err, res) => {

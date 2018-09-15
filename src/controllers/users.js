@@ -9,7 +9,7 @@ const errorResponse = (message, statusCode = HttpStatus.BAD_REQUEST) => defaultR
   error: message
 }, statusCode)
 
-class BooksController {
+class UsersControllers {
   constructor (Users) {
     this.Users = Users
   }
@@ -49,4 +49,4 @@ class BooksController {
   }
 }
 
-module.exports = BooksController
+module.exports = UsersControllers
