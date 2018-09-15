@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "server": "nodemon server.js",
-    "test": "yarn run lint && yarn run test-integration && yarn run test-unit && yarn run test-contract", 
+    "test": "yarn run lint && yarn run test-integration && yarn run test-unit && yarn run test-contract",
     "test-integration": "NODE_ENV=test mocha --opts test/integration/mocha.opts test/integration/**/*.js --exit",
     "test-unit": "NODE_ENV=test mocha --opts test/unit/mocha.opts test/unit/**/*.js",
     "test-contract": "NODE_ENV=test mocha --opts test/contracts/mocha.opts test/contracts/contracts/*.js --exit",
@@ -13,8 +13,10 @@
     "lint:fix": "eslint '**/*.js'"
   },
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "http-status": "^1.2.0",
     "mysql2": "^1.6.1",
     "sequelize": "^4.38.0"
   },

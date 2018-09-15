@@ -2,7 +2,8 @@ describe('Routes Books', () => {
   const { Books } = app.datasource.models
   const defaultBook = {
     id: 1,
-    name: 'Default Book'
+    name: 'Default Book',
+    description: 'Default description'
   }
 
   beforeEach((done) => {
@@ -19,6 +20,7 @@ describe('Routes Books', () => {
       const bookList = Joi.array().items(Joi.object().keys({
         id: Joi.number(),
         name: Joi.string(),
+        description: Joi.string(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso()
       }))
@@ -36,6 +38,7 @@ describe('Routes Books', () => {
       const book = Joi.object().keys({
         id: Joi.number(),
         name: Joi.string(),
+        description: Joi.string(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso()
       })
@@ -52,12 +55,14 @@ describe('Routes Books', () => {
   describe('Route POST /book', () => {
     const newBook = {
       id: 2,
-      name: 'newBook'
+      name: 'newBook',
+      description: 'new description'
     }
 
     const book = Joi.object().keys({
       id: Joi.number(),
       name: Joi.string(),
+      description: Joi.string(),
       created_at: Joi.date().iso(),
       updated_at: Joi.date().iso()
     })
@@ -76,7 +81,8 @@ describe('Routes Books', () => {
     it('Should update a book', (done) => {
       const updatedBook = {
         id: 1,
-        name: 'updated book'
+        name: 'updated book',
+        description: 'updated book'
       }
 
       const updatedCount = Joi.array().items(1)

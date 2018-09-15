@@ -3,10 +3,18 @@ module.exports = (sequelize, DataType) => {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,
-      autoIncremente: true
+      autoIncrement: true
     },
     name: {
       type: DataType.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    description: {
+      type: DataType.STRING,
+      allowNull: false,
       validate: {
         notEmpty: true
       }
