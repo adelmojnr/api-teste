@@ -8,6 +8,7 @@ module.exports = app => {
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
 
   const strategy = new Strategy(opts, (payload, done) => {
+    console.log(Users)
     Users.findById(payload.id)
       .then(user => {
         if (user) {

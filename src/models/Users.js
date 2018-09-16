@@ -35,10 +35,10 @@ module.exports = (sequelize, DataType) => {
         const salt = bcrypt.genSaltSync()
         user.set('password', bcrypt.hashSync(user.password, salt))
       }
-    },
-    classMethods: {
-      isPassword: (encodedPassword, password) => bcrypt.compareSync(password, encodedPassword)
     }
   })
+
+  Users.isPassword = (encodedPassword, password) => bcrypt.compareSync(password, encodedPassword)
+
   return Users
 }
