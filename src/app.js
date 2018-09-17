@@ -1,6 +1,5 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const routes = require('./routes')
 const config = require('./config/config')
 const datasource = require('./config/datasource')
 const booksRouter = require('./routes/books.js')
@@ -16,8 +15,9 @@ app.datasource = datasource(app)
 const auth = authorization(app)
 
 app.use(bodyParser.json())
-app.use('/', routes)
 app.use(auth.initialize())
+
+app.auth = auth
 
 app.set('port', 3000)
 

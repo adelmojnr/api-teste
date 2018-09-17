@@ -15,7 +15,7 @@ module.exports = app => {
           if (Users.isPassword(user.password, password)) {
             const payload = { id: user.id }
             res.json({
-              token: jwt.encoded(payload, config.jwtSecret)
+              token: jwt.encode(payload, config.jwtSecret)
             })
           } else {
             res.sendStatus(HttpStatus.UNAUTHORIZED)

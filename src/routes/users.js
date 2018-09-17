@@ -4,6 +4,7 @@ module.exports = (app) => {
   const usersController = new UsersControllers(app.datasource.models.Users)
 
   app.route('/users')
+    .all(app.auth.authenticate())
     .get((req, res) => {
       usersController.getAll({})
         .then(response => {
@@ -20,6 +21,7 @@ module.exports = (app) => {
     })
 
   app.route('/users/:id')
+    .all(app.auth.authenticate())
     .get((req, res) => {
       usersController.getById(req.params)
         .then(response => {

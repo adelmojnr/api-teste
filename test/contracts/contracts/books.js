@@ -1,20 +1,34 @@
+const jwt = require('jwt-simple')
 describe('Routes Books', () => {
   const { Books } = app.datasource.models
+  const { Users } = app.datasource.models
+  const { jwtSecret } = app.config
   const defaultBook = {
     id: 1,
     name: 'Default Book',
     description: 'Default description'
   }
 
+  let token
+
   beforeEach((done) => {
-    Books
+    Users
       .destroy({ where: {} })
-      .then(() => Books.create(defaultBook))
-      .then(() => {
-        done()
+      .then(() => Users.create({
+        name: 'Adelmo Junior',
+        email: 'adelmo@mail.com',
+        password: 'adelmo'
+      }))
+      .then(user => {
+        Books
+          .destroy({ where: {} })
+          .then(() => Books.create(defaultBook))
+          .then(() => {
+            token = jwt.encode({ id: user.id }, jwtSecret)
+            done()
+          })
       })
   })
-
   describe('Route get /books', () => {
     it('Should return a list of books', (done) => {
       const bookList = Joi.array().items(Joi.object().keys({
@@ -26,6 +40,7 @@ describe('Routes Books', () => {
       }))
       request
         .get('/books')
+        .set('Authorization', `bearer ${token}`)
         .end((err, res) => {
           joiAssert(res.body, bookList)
           done(err)
@@ -69,6 +84,7 @@ describe('Routes Books', () => {
     it('Should be create a book', (done) => {
       request
         .post('/books')
+        .set('Authorization', `bearer ${token}`)
         .send(newBook)
         .end((err, res) => {
           joiAssert(res.body, book)
@@ -89,6 +105,7 @@ describe('Routes Books', () => {
 
       request
         .put('/books/1')
+        .set('Authorization', `bearer ${token}`)
         .send(updatedBook)
         .end((err, res) => {
           joiAssert(res.body, updatedCount)
@@ -101,6 +118,7 @@ describe('Routes Books', () => {
     it('Should delete a book', done => {
       request
         .delete('/books/1')
+        .set('Authorization', `bearer ${token}`)
         .end((err, res) => {
           expect(res.statusCode).to.be.eql(204)
           done(err)
